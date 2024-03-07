@@ -2,15 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\siswa;
 use Illuminate\Http\Request;
 
 class SiswaController extends Controller
 {
     //
     function index(){
-        return "<h1>Saya siswa dari controller</h1>";
+        // $data = siswa::all();
+        $data = siswa::orderby('no_induk', 'asc')->paginate(1);
+        return view('siswa/index')->with('data', $data);
     }
     function detail($id){
-        return "<h1>Saya siswa dari controller dengan id $id</h1>";
+        $data = siswa::where('no_induk', $id)->first();
+        return view('siswa/show')->with('data', $data);
     }
 }
