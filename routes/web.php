@@ -33,8 +33,10 @@ use Illuminate\Support\Facades\Route;
 //     return "<h1>Saya siswa dengan $id dan nama saya $nama</h1>";
 // })->where(['id' => '[0-9]+', 'nama' => '[A-Za-z]+']);
 
-Route::get('siswa', [SiswaController::class, 'index']);
-Route::get('siswa/{id}', [SiswaController::class, 'detail'])->where('id', '[0-9]+');
+// Route::get('siswa', [SiswaController::class, 'index']);
+// Route::get('siswa/{id}', [SiswaController::class, 'detail'])->where('id', '[0-9]+');
+
+Route::resource('siswa', SiswaController::class);
 
 Route::get('/', [HalamanController::class, 'index']);
 Route::get('/tentang', [HalamanController::class, 'tentang']);
