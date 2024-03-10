@@ -9,6 +9,7 @@
       <tr>
         <th scope="col">No Induk</th>
         <th scope="col">Nama</th>
+        <th scope="col">Foto</th>
         <th scope="col">Alamat</th>
         <th scope="col">Aksi</th>
       </tr>
@@ -17,6 +18,11 @@
       @foreach ($data as $item)
       <tr>
         <td>{{ $item->no_induk }}</td>
+        <td>
+          @if ($item->foto)
+          <img src="{{ url('foto').'/'.$item->foto }}" alt="#" width="80">
+          @endif
+        </td>
         <td>{{ $item->nama }}</td>
         <td>{{ $item->alamat }}</td>
         <td class="d-flex">

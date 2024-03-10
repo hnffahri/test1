@@ -5,7 +5,7 @@
 <div class="mb-5 text-end">
   <a href="/siswa" class="btn btn-primary btn-sm">Kembali</a>
 </div>
-<form method="POST" action="{{ '/siswa/'.$data->no_induk }}">
+<form method="POST" action="{{ '/siswa/'.$data->no_induk }}" enctype="multipart/form-data">
   @csrf
   @method('PUT')
   <div class="mb-3">
@@ -20,6 +20,15 @@
     <label for="alamat" class="form-label">Alamat</label>
     <textarea class="form-control" id="alamat" name="alamat">{{ $data->alamat }}</textarea>
   </div>
+  <div class="mb-3">
+    <label for="foto" class="form-label">Foto</label>
+    <input type="file" class="form-control" id="foto" name="foto">
+  </div>
+  @if ($data->foto)
+  <div class="mb-3">
+    <img src="{{ url('foto').'/'.$data->foto }}" alt="#" width="120" class="border">
+  </div>
+  @endif
   <button class="btn btn-primary">Ubah</button>
 </form>
 

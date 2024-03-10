@@ -9,6 +9,9 @@
     <title>Data Siswa</title>
 </head>
 <body>
+    @if (Auth::check())
+    @include('komponen/menu')
+    @endif
     <div class="container py-5">
         @include('komponen/pesan')
         @yield('konten')
