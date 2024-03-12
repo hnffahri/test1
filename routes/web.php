@@ -44,6 +44,7 @@ Route::get('/tentang', [HalamanController::class, 'tentang']);
 Route::get('/kontak', [HalamanController::class, 'kontak']);
 
 Route::get('/sesi', [SessionController::class, 'index'])->middleware('isTamu');
+Route::get('/sesi/lupa-password', [SessionController::class, 'lupapassword'])->middleware('isTamu');;
 Route::post('/sesi/login', [SessionController::class, 'login']);
 Route::get('/sesi/logout', [SessionController::class, 'logout']);
 

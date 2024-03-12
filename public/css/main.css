@@ -1,3 +1,11 @@
 /* html,body{
     background-color: wheat !important;
 } */
+
+.btn{
+    padding: 5px 15px !important;
+}
+
+.btn-primary{
+    color: white !important;
+}

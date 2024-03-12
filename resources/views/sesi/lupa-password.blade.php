@@ -11,20 +11,16 @@
     </div>
     @endif
     <div class="card card-body">
-      <h3 class="text-dark mb-4">Login</h3>
-      <form action="/sesi/login" method="POST">
+      <h3 class="text-dark">Lupa Password</h3>
+      <p>Masukan email anda yang terdaftar</p>
+      <form action="/sesi/kirim-email" method="POST">
         @csrf
         <div class="mb-3">
           <label for="email" class="form-label">Email</label>
           <input type="email" class="form-control" id="email" name="email" value="{{ Session::get('email') }}">
         </div>
-        <div class="mb-3">
-          <label for="password" class="form-label">Password</label>
-          <input type="password" class="form-control" id="password" name="password">
-          <a href="sesi/lupa-password">Lupa Password?</a>
-        </div>
         <div class="text-center">
-          <button class="btn btn-primary w-100" type="submit">Login</button>
+          <button class="btn btn-primary w-100" type="submit">Kirim</button>
           <div class="mt-3">Belum punya akun?</div>
           <a href="/sesi/register" class="btn btn-light w-100 mt-3">Daftar</a>
         </div>

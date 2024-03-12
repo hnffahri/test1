@@ -4,7 +4,7 @@
 <div class="row justify-content-center">
   <div class="col-lg-6">
     <div class="card card-body">
-      <h3 class="text-dark">Register</h3>
+      <h3 class="text-dark mb-4">Register</h3>
       <form action="/sesi/create" method="POST">
         @csrf
         <div class="mb-3">
@@ -19,7 +19,11 @@
           <label for="password" class="form-label">Password</label>
           <input type="password" class="form-control" id="password" name="password">
         </div>
-        <button class="btn btn-primary" type="submit">Register</button>
+        <div class="text-center">
+          <button class="btn btn-primary w-100" type="submit">Register</button>
+          <div class="mt-3">Sudah punya akun?</div>
+          <a href="/sesi" class="btn btn-light w-100 mt-3">Masuk</a>
+        </div>
       </form>
     </div>
   </div>

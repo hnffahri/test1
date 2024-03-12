@@ -43,6 +43,10 @@ class SessionController extends Controller
     function register(){
         return view("sesi/register");
     }
+    
+    function lupapassword(){
+        return view("sesi/lupa-password");
+    }
 
     function create(Request $request){
         $request->session()->flash('name', $request->name);
