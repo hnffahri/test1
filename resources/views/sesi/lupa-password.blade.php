@@ -10,10 +10,13 @@
       @endforeach
     </div>
     @endif
+    @if (session()->has('status'))
+    <div class="alert alert-success">{{ session()->get('status') }}</div>
+    @endif
     <div class="card card-body">
       <h3 class="text-dark">Lupa Password</h3>
       <p>Masukan email anda yang terdaftar</p>
-      <form action="/sesi/kirim-email" method="POST">
+      <form action="{{ route('password.email') }}" method="POST">
         @csrf
         <div class="mb-3">
           <label for="email" class="form-label">Email</label>
