@@ -10,13 +10,16 @@
       @endforeach
     </div>
     @endif
-    @if (session()->has('status'))
-    <div class="alert alert-success">{{ session()->get('status') }}</div>
+    @if (Session::get('success'))
+    <div class="alert alert-success">{{ Session::get('success') }}</div>
     @endif
+    {{-- @if (session()->has('status'))
+    <div class="alert alert-success">{{ session()->get('status') }}</div>
+    @endif --}}
     <div class="card card-body">
       <h3 class="text-dark">Lupa Password</h3>
       <p>Masukan email anda yang terdaftar</p>
-      <form action="{{ route('password.email') }}" method="POST">
+      <form action="/sesi/lupa-password" method="POST">
         @csrf
         <div class="mb-3">
           <label for="email" class="form-label">Email</label>

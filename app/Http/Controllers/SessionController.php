@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Hash;
 
+use Illuminate\Support\Facades\Password;
+use Illuminate\Auth\Events\PasswordReset;
+use Illuminate\Support\Str;
 class SessionController extends Controller
 {
     function index(){
@@ -43,10 +46,6 @@ class SessionController extends Controller
     function register(){
         return view("sesi/register");
     }
-    
-    function lupapassword(){
-        return view("sesi/lupa-password");
-    }
 
     function create(Request $request){
         $request->session()->flash('name', $request->name);
@@ -79,9 +78,74 @@ class SessionController extends Controller
         ];
 
         if(Auth::attempt($infologin)){
-            return redirect('siswa')->with('success', Auth::user()->name . ' Berhasil login');
+            return redirect('siswa');
         }else{
             return redirect('sesi')->withErrors('Email dan password tidak valid');
         }
     }
+    
+    function lupapassword(){
+        return view("sesi/lupa-password");
+    }
+    
+    function kirimemail(Request $request){
+        $request->session()->flash('email', $request->email);
+        $request->validate([
+            'email'=>'required|email:users'
+        ],[
+            'email.required'=>'Email wajib diisi',
+            'email.email'=>'Gunakan email yang valid',
+        ]);
+
+        $data = Password::sendResetLink(
+            $request->only('email')
+        );
+
+        if($data === Password::RESET_LINK_SENT){
+            return redirect('sesi/lupa-password')->with('success', 'Buka email anda');
+        }else{
+            return redirect('sesi/lupa-password')->withErrors('Email tidak terdaftar');
+        }
+        // return $data === Password::RESET_LINK_SENT
+        // ? back()->with('success', 'Buka email anda')
+        // : back()->withErrors('Email tidak terdaftar');
+
+    }
+    function resetpassword(Request $request){
+        return view("sesi/reset-password", ['request' => $request]);
+    }
+    function updatepassword(Request $request){
+        $request->validate([
+            'token' => 'required',
+            'email' => 'required|email',
+            'password' => 'required|min:8|confirmed',
+        ],[
+            'token.required'=>'Tidak ada token',
+            'email.required'=>'Tidak ada email',
+            'password.required'=>'Tidak ada password',
+            'password.min'=>'Minimum password wajib diisi dengan minimum 8 karakter',
+            'password.confirmed'=>'Konfirmasi password tidak sesuai'
+        ]);
+    
+        $status = Password::reset(
+            $request->only('email', 'password', 'password_confirmation', 'token'),
+            function (User $user, string $password) {
+                $user->forceFill([
+                    'password' => Hash::make($password)
+                ])->setRememberToken(Str::random(60));
+                $user->save();
+                event(new PasswordReset($user));
+            }
+        );
+        // if($status === Password::PASSWORD_RESET){
+        //     return redirect('sesi')->with('success', 'Reset Password berhasil');
+        // }else{
+        //     back()->withErrors('Token tidak valid');
+        // }
+        return $status === Password::PASSWORD_RESET
+                    ? redirect('sesi')->with('success', 'Reset Password berhasil')
+                    : back()->withErrors('Token tidak valid');
+    }
+
+
 }

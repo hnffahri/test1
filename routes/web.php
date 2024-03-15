@@ -5,12 +5,6 @@ use App\Http\Controllers\HalamanController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\SiswaController;
 use Illuminate\Support\Facades\Route;
-
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Password;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Auth\Events\PasswordReset;
-use Illuminate\Support\Str;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -49,58 +43,17 @@ Route::get('/', [HalamanController::class, 'index']);
 Route::get('/tentang', [HalamanController::class, 'tentang']);
 Route::get('/kontak', [HalamanController::class, 'kontak']);
 
+// login
 Route::get('/sesi', [SessionController::class, 'index'])->middleware('isTamu');
-// Route::get('/sesi/lupa-password', [SessionController::class, 'lupapassword'])->middleware('isTamu');
 Route::post('/sesi/login', [SessionController::class, 'login']);
 Route::get('/sesi/logout', [SessionController::class, 'logout']);
 
+// daftar
 Route::get('/sesi/register', [SessionController::class, 'register'])->middleware('isTamu');
 Route::post('/sesi/create', [SessionController::class, 'create']);
 
-Route::get('/sesi/lupa-password', function () {
-    return view('sesi.lupa-password');
-})->middleware('guest')->name('password.request');
-
-Route::post('/sesi/lupa-password', function (Request $request) {
-    $request->validate(['email' => 'required|email']);
-
-    $status = Password::sendResetLink(
-        $request->only('email')
-    );
-
-    return $status === Password::RESET_LINK_SENT
-                ? back()->with(['status' => __($status)])
-                : back()->withErrors(['email' => __($status)]);
-})->middleware('guest')->name('password.email');
-
-Route::get('/sesi/reset-password/{token}', function (string $token) {
-    return view('sesi.reset-password', ['token' => $token]);
-    // return 'berhasil kirim email';
-})->middleware('guest')->name('password.reset');
-
-
-Route::post('/sesi/reset-password', function (Request $request) {
-    // return 'berhasil';
-    $request->validate([
-        'token' => 'required',
-        'email' => 'required|email',
-        'password' => 'required|min:8|confirmed',
-    ]);
-
-    $status = Password::reset(
-        $request->only('email', 'password', 'password_confirmation', 'token'),
-        function (User $user, string $password) {
-            $user->forceFill([
-                'password' => Hash::make($password)
-            ])->setRememberToken(Str::random(60));
- 
-            $user->save();
- 
-            event(new PasswordReset($user));
-        }
-    );
-
-    return $status === Password::PASSWORD_RESET
-                ? redirect()->route('sesi')->with('status', __($status))
-                : back()->withErrors(['email' => [__($status)]]);
-})->middleware('guest')->name('password.update');
+// Lupa dan reset password
+Route::get('/sesi/lupa-password', [SessionController::class, 'lupapassword'])->middleware('isTamu');
+Route::post('/sesi/lupa-password', [SessionController::class, 'kirimemail'])->middleware('isTamu');
+Route::get('/sesi/reset-password/{token}', [SessionController::class, 'resetpassword'])->middleware('isTamu')->name('password.reset');
+Route::post('/sesi/reset-password', [SessionController::class, 'updatepassword'])->middleware('isTamu');

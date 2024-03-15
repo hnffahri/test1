@@ -18,7 +18,7 @@
     <div class="card card-body">
       <h3 class="text-dark">Reset Password</h3>
       <p>Masukan email anda yang terdaftar</p>
-      <form action="{{ route('password.update') }}" method="POST">
+      <form action="/sesi/reset-password" method="POST">
         @csrf
         <input type="text" class="form-control" id="text" name="token" value="{{ request()->token }}">
         <input type="text" class="form-control" id="text" name="email" value="{{ request()->email }}">
