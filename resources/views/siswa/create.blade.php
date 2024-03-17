@@ -2,6 +2,7 @@
 
 @section('konten')
 
+@include('komponen/pesan')
 <form method="POST" action="/siswa" enctype="multipart/form-data">
   @csrf
   <div class="mb-3">

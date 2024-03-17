@@ -3,7 +3,8 @@
 @section('konten')
 <div class="row justify-content-center">
   <div class="col-lg-6">
-    @if ($errors->any())
+    @include('komponen/pesan')
+    {{-- @if ($errors->any())
     <div class="alert alert-danger">
       <ul class="mb-0">
         @foreach ($errors->all() as $item)
@@ -14,7 +15,7 @@
     @endif
     @if (session()->has('status'))
     <div class="alert alert-success">{{ session()->get('status') }}</div>
-    @endif
+    @endif --}}
     <div class="card card-body">
       <h3 class="text-dark">Reset Password</h3>
       <p>Masukan email anda yang terdaftar</p>

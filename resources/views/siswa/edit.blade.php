@@ -2,6 +2,7 @@
 
 @section('konten')
 
+@include('komponen/pesan')
 <div class="mb-5 text-end">
   <a href="/siswa" class="btn btn-primary btn-sm">Kembali</a>
 </div>

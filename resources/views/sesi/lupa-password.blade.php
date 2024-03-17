@@ -3,7 +3,9 @@
 @section('konten')
 <div class="row justify-content-center">
   <div class="col-lg-6">
-    @if ($errors->any())
+    @include('komponen/pesan')
+    
+    {{-- @if ($errors->any())
     <div class="alert alert-danger">
       @foreach ($errors->all() as $item)
       {{ $item }}
@@ -12,9 +14,6 @@
     @endif
     @if (Session::get('success'))
     <div class="alert alert-success">{{ Session::get('success') }}</div>
-    @endif
-    {{-- @if (session()->has('status'))
-    <div class="alert alert-success">{{ session()->get('status') }}</div>
     @endif --}}
     <div class="card card-body">
       <h3 class="text-dark">Lupa Password</h3>

@@ -3,6 +3,7 @@
 @section('konten')
 <div class="row justify-content-center">
   <div class="col-lg-6">
+    @include('komponen/pesan')
     <div class="card card-body">
       <h3 class="text-dark mb-4">Register</h3>
       <form action="/sesi/create" method="POST">

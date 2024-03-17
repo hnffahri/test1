@@ -2,6 +2,7 @@
 
 @section('konten')
 
+@include('komponen/pesan')
 <a href="/siswa/create" class="btn btn-primary">Tambah Siswa</a>
 
 <table class="table table-bordered mt-4">
