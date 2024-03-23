@@ -4,6 +4,7 @@ use App\Models\User;
 use App\Http\Controllers\HalamanController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\SiswaController;
+use App\Http\Controllers\GuruController;
 use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
@@ -38,6 +39,7 @@ use Illuminate\Support\Facades\Route;
 // Route::get('siswa/{id}', [SiswaController::class, 'detail'])->where('id', '[0-9]+');
 
 Route::resource('siswa', SiswaController::class)->middleware('isLogin');
+Route::get('/guru', [GuruController::class, 'guru']);
 
 Route::get('/', [HalamanController::class, 'index']);
 Route::get('/tentang', [HalamanController::class, 'tentang']);
