@@ -2,10 +2,28 @@
     background-color: wheat !important;
 } */
 
+body{
+    padding-top: 58px;
+}
+
 .btn{
     padding: 5px 15px !important;
 }
 
 .btn-primary{
     color: white !important;
+}
+
+.paginate-custom .d-sm-none{
+    display: none !important;
+}
+
+.paginate-custom .d-none{
+    display: block !important;
+}
+
+.paginate-custom{
+    display: flex !important;
+    justify-content: center;
+    text-align: center;
 }
