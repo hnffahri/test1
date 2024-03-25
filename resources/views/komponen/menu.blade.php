@@ -9,7 +9,7 @@
         <div class="navbar-nav ms-auto">
           <a class="nav-link {{ request()->is('/*') ? 'active' : '' }}" href="/">Beranda</a>
           <a class="nav-link {{ request()->is('siswa*') ? 'active' : '' }}" href="/siswa">Siswa</a>
-          <a class="nav-link {{ request()->is('guru*') ? 'active' : '' }}" href="/guru">guru</a>
+          <a class="nav-link {{ request()->is('guru*') ? 'active' : '' }}" href="/guru">Guru</a>
           <a class="nav-link {{ request()->is('tentang*') ? 'active' : '' }}" href="/tentang">Tentang</a>
           <a class="nav-link {{ request()->is('kontak*') ? 'active' : '' }}" href="/kontak">Kontak</a>
           @if (Auth::check())
