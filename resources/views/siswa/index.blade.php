@@ -30,7 +30,7 @@
                   <a href="{{ url('/siswa/'.$item->no_induk.'/edit') }}" class="btn btn-light btn-sm w-100"><i class="fal fa-edit me-2"></i>Edit</a>
                 </div>
                 <div class="col-6">
-                  <form onsubmit="return confirm('Yakin mau hapus data?')" action="{{ '/siswa/'.$item->nip }}" method="post">
+                  <form onsubmit="return confirm('Yakin mau hapus data?')" action="{{ '/siswa/'.$item->no_induk }}" method="post">
                     @csrf
                     @method('DELETE')
                     <button class="btn btn-danger btn-sm w-100" type="submit"><i class="fal fa-trash-alt me-2"></i>Hapus</button>

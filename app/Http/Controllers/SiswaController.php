@@ -38,27 +38,35 @@ class SiswaController extends Controller
             'no_induk' => 'required|numeric',
             'nama' => 'required',
             'alamat' => 'required',
-            'foto' => 'required|mimes:jpeg,jpg,png'
+            'foto' => 'mimes:jpeg,jpg,png'
         ],[
             'no_induk.numeric'=>'Nomer induk wajib diisi dengan angka',
             'no_induk.required'=>'Nomer induk wajib diisi',
             'nama.required'=>'Nama wajib diisi',
             'alamat.required'=>'Alamat wajib diisi',
-            'foto.required'=>'Foto wajib diisi',
             'foto.mimes'=>'Foto hanya boleh berekstensi jpg, jpeg, png dan gif'
         ]);
-
-        $foto_file = $request->file('foto');
-        $foto_ekstensi = $foto_file->extension();
-        $foto_nama = date('ymdhis') . "." . $foto_ekstensi;
-        $foto_file->move(public_path('foto'), $foto_nama);
 
         $data = [
             'no_induk' => $request->input('no_induk'),
             'nama' => $request->input('nama'),
-            'alamat' => $request->input('alamat'),
-            'foto' => $foto_nama
+            'alamat' => $request->input('alamat')
         ];
+        
+        if($request->hasFile('foto')){
+            $request->validate([
+                'foto' => 'mimes:jpeg,jpg,png'
+            ],[
+                'foto.mimes'=>'Foto hanya boleh berekstensi jpg, jpeg, png dan gif'
+            ]
+            );
+            $foto_file = $request->file('foto');
+            $foto_ekstensi = $foto_file->extension();
+            $foto_nama = date('ymdhis') . "." . $foto_ekstensi;
+            $foto_file->move(public_path('foto'), $foto_nama);
+            $data['foto'] = $foto_nama;
+        }
+
         siswa::create($data);
         return redirect('siswa')->with('success', 'Data siswa berhasil ditambahkan');
     }
