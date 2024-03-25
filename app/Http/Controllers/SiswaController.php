@@ -13,7 +13,7 @@ class SiswaController extends Controller
      */
     public function index()
     {
-        $data = siswa::orderby('no_induk', 'desc')->paginate(1);
+        $data = siswa::orderby('no_induk', 'desc')->paginate(6);
         return view('siswa/index')->with('data', $data);
     }
 

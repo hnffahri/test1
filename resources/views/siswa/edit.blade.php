@@ -29,7 +29,11 @@
         </div>
         @if ($data->foto)
         <div class="mb-3">
-          <img src="{{ url('foto').'/'.$data->foto }}" alt="#" width="120" class="border">
+          <img src="{{ url('foto').'/'.$data->foto }}" alt="#" width="120" class="border rounded bulat">
+        </div>
+        @else
+        <div class="mb-3">
+          <img src="{{ url('foto').'/user.png' }}" alt="#" width="120" class="border rounded bulat">
         </div>
         @endif
         <button class="btn btn-primary">Ubah</button>

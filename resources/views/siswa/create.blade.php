@@ -9,7 +9,7 @@
         @csrf
         <div class="mb-3">
           <label for="no_induk" class="form-label">No Induk</label>
-          <input type="text" class="form-control" id="no_induk" value="{{ Session::get('no_induk') }}" name="no_induk">
+          <input type="number" class="form-control" id="no_induk" value="{{ Session::get('no_induk') }}" name="no_induk">
         </div>
         <div class="mb-3">
           <label for="nama" class="form-label">Nama Siswa</label>

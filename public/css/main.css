@@ -6,6 +6,10 @@ body{
     padding-top: 58px;
 }
 
+a{
+    text-decoration: none;
+}
+
 .btn{
     padding: 5px 15px !important;
 }
@@ -26,4 +30,9 @@ body{
     display: flex !important;
     justify-content: center;
     text-align: center;
+}
+
+.bulat{
+    aspect-ratio: 1/1;
+    object-fit: cover;
 }
